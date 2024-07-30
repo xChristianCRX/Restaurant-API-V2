@@ -1,4 +1,4 @@
-package com.restaurant.api.domain.menu.dto;
+package com.restaurant.api.infra.dto;
 
 import com.restaurant.api.domain.menu.TypeItemENUM;
 import jakarta.persistence.EnumType;

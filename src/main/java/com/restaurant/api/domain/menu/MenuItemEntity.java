@@ -1,6 +1,6 @@
 package com.restaurant.api.domain.menu;
 
-import com.restaurant.api.domain.menu.dto.CreateMenuItemDTO;
+import com.restaurant.api.infra.dto.CreateMenuItemDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

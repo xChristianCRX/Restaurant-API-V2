@@ -20,7 +20,7 @@ public class TableEntity {
 
     @OneToMany
     @JoinTable(
-            name = "table_history",
+            name = "table_orderhistory",
             joinColumns = @JoinColumn(name = "tableNumber"),
             inverseJoinColumns = @JoinColumn(name = "orderHistory_id")
     )

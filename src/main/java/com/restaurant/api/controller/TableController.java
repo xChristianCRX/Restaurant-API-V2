@@ -17,12 +17,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class TableController {
 
     @Autowired
-    private TableRepository tableRepository;
+    private TableRepository repository;
 
     @PostMapping
     public ResponseEntity createTable(@RequestBody @Valid CreateTableDTO data, UriComponentsBuilder uriComponent) {
         var table = new TableEntity(data);
-        tableRepository.save(table);
+        repository.save(table);
 
         var uri = uriComponent.path("/table/{id}").buildAndExpand(table.getTableNumber()).toUri();
         return ResponseEntity.created(uri).body(table);

@@ -30,4 +30,5 @@ public class AdditionController {
         var result = repository.findAll();
         return ResponseEntity.ok().body(result);
     }
+
 }

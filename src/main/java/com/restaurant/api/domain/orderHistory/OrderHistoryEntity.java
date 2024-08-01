@@ -27,7 +27,7 @@ public class OrderHistoryEntity {
 
     @OneToMany
     @JoinTable(
-            name = "orderhistory_tableorders",
+            name = "rl_orderhistory_tableorders",
             joinColumns = @JoinColumn(name = "tableOrder_id"),
             inverseJoinColumns = @JoinColumn(name = "addition_id")
     )

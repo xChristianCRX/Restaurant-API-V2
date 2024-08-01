@@ -21,7 +21,7 @@ public class AdditionController {
         var addition = new AdditionEntity(data);
         repository.save(addition);
 
-        var uri = uriComponent.path("/person/{id}").buildAndExpand(addition.getId()).toUri();
+        var uri = uriComponent.path("/addition/{id}").buildAndExpand(addition.getId()).toUri();
         return ResponseEntity.created(uri).body(addition);
     }
 

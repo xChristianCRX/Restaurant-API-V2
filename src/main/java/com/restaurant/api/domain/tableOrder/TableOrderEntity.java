@@ -32,7 +32,7 @@ public class TableOrderEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "item_additions",
+            name = "rl_item_additions",
             joinColumns = @JoinColumn(name = "tableOrder_id"),
             inverseJoinColumns = @JoinColumn(name = "addition_id")
     )

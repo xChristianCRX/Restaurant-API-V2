@@ -23,15 +23,21 @@ public class OrderHistoryEntity {
 
     @ManyToOne
     @JoinColumn(name = "table_number", nullable = false)
-    private TableEntity tableNumber;
+    private TableEntity table;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "rl_orderhistory_tableorders",
-            joinColumns = @JoinColumn(name = "tableOrder_id"),
-            inverseJoinColumns = @JoinColumn(name = "addition_id")
+            joinColumns = @JoinColumn(name = "history_id"),
+            inverseJoinColumns = @JoinColumn(name = "table_order_id")
     )
     private List<TableOrderEntity> tableOrders;
 
     private Boolean active;
+
+    public OrderHistoryEntity(TableEntity tableEntity, List<TableOrderEntity> tableOrders, Boolean active){
+        this.table = tableEntity;
+        this.tableOrders = tableOrders;
+        this.active = active;
+    }
 }

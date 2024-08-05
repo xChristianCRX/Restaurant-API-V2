@@ -28,16 +28,16 @@ public class TableOrderEntity {
     @ManyToOne
     private MenuItemEntity item;
 
-    @ManyToOne
-    private PersonEntity waiter;
-
     @ManyToMany
     @JoinTable(
             name = "rl_item_additions",
-            joinColumns = @JoinColumn(name = "tableOrder_id"),
-            inverseJoinColumns = @JoinColumn(name = "addition_id")
+            joinColumns = @JoinColumn(name = "fk_tableOrder"),
+            inverseJoinColumns = @JoinColumn(name = "fk_addition")
     )
     private List<AdditionEntity> additions;
+
+    @ManyToOne
+    private PersonEntity waiter;
 
     private String observations;
 

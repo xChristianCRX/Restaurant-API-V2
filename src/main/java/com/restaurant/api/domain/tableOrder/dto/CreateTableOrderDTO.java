@@ -11,10 +11,10 @@ public record CreateTableOrderDTO(
         @NotNull
         MenuItemEntity item,
 
+        List<AdditionEntity> additions,
+
         @NotNull
         PersonEntity waiter,
-
-        List<AdditionEntity> additions,
 
         String observations
     ) {

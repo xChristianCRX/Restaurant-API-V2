@@ -3,6 +3,7 @@ package com.restaurant.api.controller;
 import com.restaurant.api.domain.tableOrder.TableOrderEntity;
 import com.restaurant.api.domain.tableOrder.TableOrderRepository;
 import com.restaurant.api.domain.tableOrder.dto.CreateTableOrderDTO;
+import com.restaurant.api.domain.tableOrder.dto.TableOrderDetailsDTO;
 import com.restaurant.api.domain.tableOrder.useCases.CreateTableOrderUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +26,15 @@ public class TableOrderController {
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody CreateTableOrderDTO data, UriComponentsBuilder uriComponent){
         var tableOrder = createTableOrderUseCase.execute(data);
-        repository.save(tableOrder);
 
         var uri = uriComponent.path("/tableOrder/{id}").buildAndExpand(tableOrder.getId()).toUri();
-        return ResponseEntity.created(uri).body(tableOrder);
+        return ResponseEntity.created(uri).body(new TableOrderDetailsDTO(tableOrder));
     }
 
     @GetMapping
     public ResponseEntity listAll(){
         var result = repository.findAll();
+        System.out.println(result);
         return ResponseEntity.ok().body(result);
     }
 }

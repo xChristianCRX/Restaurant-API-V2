@@ -2,7 +2,6 @@ package com.restaurant.api.controller;
 
 import com.restaurant.api.domain.table.TableEntity;
 import com.restaurant.api.domain.table.TableRepository;
-import com.restaurant.api.domain.table.dto.CreateTableDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,7 @@ public class TableController {
     private TableRepository repository;
 
     @PostMapping
-    public ResponseEntity createTable(@RequestBody @Valid CreateTableDTO data, UriComponentsBuilder uriComponent) {
-        var table = new TableEntity(data);
+    public ResponseEntity createTable(@RequestBody @Valid TableEntity table, UriComponentsBuilder uriComponent) {
         repository.save(table);
 
         var uri = uriComponent.path("/table/{id}").buildAndExpand(table.getTableNumber()).toUri();

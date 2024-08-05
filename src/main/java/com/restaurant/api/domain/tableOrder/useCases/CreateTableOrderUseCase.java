@@ -35,8 +35,12 @@ public class CreateTableOrderUseCase {
         var item = menuItemRepository.findById(data.item().getId()).orElse(new MenuItemEntity());
         var additions = data.additions().stream()
                 .map(additionEntity -> additionRepository.findById(additionEntity.getId()).orElse(new AdditionEntity()))
-                .collect(Collectors.toList());
+                .toList();
 
-        return new TableOrderEntity(item, waiter, additions, data.observations());
+        var tableOrderEntity = new TableOrderEntity(item, waiter, additions, data.observations());
+        tableOrderRepository.save(tableOrderEntity);
+        //return tableOrderRepository.findById(tableOrderRepository.save(new TableOrderEntity(item, waiter, additions, data.observations())));
+
+        return tableOrderEntity;
     }
 }

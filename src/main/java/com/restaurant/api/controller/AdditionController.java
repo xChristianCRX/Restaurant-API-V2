@@ -2,6 +2,7 @@ package com.restaurant.api.controller;
 
 import com.restaurant.api.domain.addition.AdditionEntity;
 import com.restaurant.api.domain.addition.AdditionRepository;
+import com.restaurant.api.domain.addition.CreateAdditionUseCase;
 import com.restaurant.api.domain.addition.dto.CreateAdditionDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,12 @@ public class AdditionController {
     @Autowired
     private AdditionRepository repository;
 
+    @Autowired
+    private CreateAdditionUseCase createAdditionUseCase;
+
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody CreateAdditionDTO data, UriComponentsBuilder uriComponent){
-        var addition = new AdditionEntity(data);
+        var addition = createAdditionUseCase.execute(data);
         repository.save(addition);
 
         var uri = uriComponent.path("/addition/{id}").buildAndExpand(addition.getId()).toUri();

@@ -3,7 +3,7 @@ package com.restaurant.api.domain.person.useCases;
 import com.restaurant.api.domain.person.PersonEntity;
 import com.restaurant.api.domain.person.PersonRepository;
 import com.restaurant.api.domain.person.dto.CreatePersonDTO;
-import com.restaurant.api.infra.exceptions.UserAlreadyExistException;
+import com.restaurant.api.infra.exceptions.AlreadyExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class CreatePersonUseCase {
         this.personRepository
                 .findByUsernameOrEmail(data.username(), data.email())
                 .ifPresent((user) -> {
-                    throw new UserAlreadyExistException();
+                    throw new AlreadyExistException("Username or email already exists!");
                 });
 
         return this.personRepository.save(new PersonEntity(data));

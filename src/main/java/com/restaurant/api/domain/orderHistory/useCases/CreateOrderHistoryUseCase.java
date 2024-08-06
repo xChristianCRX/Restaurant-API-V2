@@ -6,6 +6,8 @@ import com.restaurant.api.domain.table.TableEntity;
 import com.restaurant.api.domain.table.TableRepository;
 import com.restaurant.api.domain.tableOrder.dto.CreateTableOrderDTO;
 import com.restaurant.api.domain.tableOrder.useCases.CreateTableOrderUseCase;
+import com.restaurant.api.infra.exceptions.AlreadyExistException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,8 @@ public class CreateOrderHistoryUseCase {
     private CreateTableOrderUseCase createTableOrderUseCase;
 
     public OrderHistoryEntity execute(CreateOrderHistoryDTO data){
-        var table = tableRepository.findById(data.tableNumber().getTableNumber()).orElse(new TableEntity());
+        var table = tableRepository.findById(data.tableNumber().getTableNumber())
+                .orElseThrow(() -> new EntityNotFoundException("Table number not found!"));
         var tableOrders = data.tableOrders().stream()
                 .map(tableOrderEntity -> {
                     var dto = new CreateTableOrderDTO(

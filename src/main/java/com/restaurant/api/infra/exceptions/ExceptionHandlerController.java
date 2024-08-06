@@ -2,20 +2,18 @@ package com.restaurant.api.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.client.HttpClientErrorException;
 
 @RestControllerAdvice
 public class ExceptionHandlerController {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity exception404(){
-        return ResponseEntity.notFound().build();
+    public ResponseEntity exception404(EntityNotFoundException e){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -24,8 +22,8 @@ public class ExceptionHandlerController {
         return ResponseEntity.badRequest().body(errors.stream().map(ValidationErrorDataDTO::new).toList());
     }
 
-    @ExceptionHandler(UserAlreadyExistException.class)
-    public ResponseEntity exception409(UserAlreadyExistException e){
+    @ExceptionHandler(AlreadyExistException.class)
+    public ResponseEntity exception409(AlreadyExistException e){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 

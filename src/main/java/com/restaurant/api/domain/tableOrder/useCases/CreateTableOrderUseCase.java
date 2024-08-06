@@ -9,11 +9,9 @@ import com.restaurant.api.domain.person.PersonRepository;
 import com.restaurant.api.domain.tableOrder.TableOrderEntity;
 import com.restaurant.api.domain.tableOrder.TableOrderRepository;
 import com.restaurant.api.domain.tableOrder.dto.CreateTableOrderDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.stream.Collectors;
 
 @Service
 public class CreateTableOrderUseCase {
@@ -31,16 +29,17 @@ public class CreateTableOrderUseCase {
     private AdditionRepository additionRepository;
 
     public TableOrderEntity execute(CreateTableOrderDTO data){
-        var waiter = personRepository.findById(data.waiter().getId()).orElse(new PersonEntity());
-        var item = menuItemRepository.findById(data.item().getId()).orElse(new MenuItemEntity());
+        var waiter = personRepository.findById(data.waiter().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Waiter ID not found!"));
+        var item = menuItemRepository.findById(data.item().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Item ID not found!"));
         var additions = data.additions().stream()
-                .map(additionEntity -> additionRepository.findById(additionEntity.getId()).orElse(new AdditionEntity()))
+                .map(additionEntity -> additionRepository.findById(additionEntity.getId())
+                        .orElseThrow(() -> new EntityNotFoundException("Addition ID not found!")))
                 .toList();
 
         var tableOrderEntity = new TableOrderEntity(item, waiter, additions, data.observations());
         tableOrderRepository.save(tableOrderEntity);
-        //return tableOrderRepository.findById(tableOrderRepository.save(new TableOrderEntity(item, waiter, additions, data.observations())));
-
         return tableOrderEntity;
     }
 }

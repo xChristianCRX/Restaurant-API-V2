@@ -2,6 +2,7 @@ package com.restaurant.api.controller;
 
 import com.restaurant.api.domain.person.PersonEntity;
 import com.restaurant.api.domain.person.dto.AuthenticationDTO;
+import com.restaurant.api.infra.security.TokenDTO;
 import com.restaurant.api.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,6 @@ public class AuthController {
         var authentication = manager.authenticate(authenticationToken);
         var tokenJWT = tokenService.generateToken((PersonEntity) authentication.getPrincipal());
 
-        return ResponseEntity.ok(tokenJWT);
+        return ResponseEntity.ok(new TokenDTO(tokenJWT));
     }
 }

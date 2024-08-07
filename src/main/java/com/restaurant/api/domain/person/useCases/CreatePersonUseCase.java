@@ -24,7 +24,6 @@ public class CreatePersonUseCase {
                     throw new AlreadyExistException("Username or email already exists!");
                 });
         var password = passwordEncoder.encode(data.password());
-        System.out.println(password);
         var person = new PersonEntity(data);
         person.setPassword(password);
 

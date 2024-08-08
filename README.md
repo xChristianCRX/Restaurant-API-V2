@@ -7,11 +7,11 @@
 </p>
 
 <p align="center">
-    <b>Nesse projeto, desenvolvi uma API Rest para ser o back-end de um futuro front-end. O sistema consiste num <br> 
-gerenciamento de comandas e controle de caixa, feito para se adaptar dentro de um restaurante ou uma lanchonete.  <br>
-O sistema é direcionado para os garçons e atendentes de caixa do estabelecimento. É possível realizar cadastro dos <br>
-usuários, das mesas, dos itens do cardápio, e principalmente, do pedido feito em uma mesa do local. Na entidade pedido, <br>
-é possível visualizar todos os itens solicitados com seus respectivos acréscimos e preço, a hora que tal item foi <br>
+    <b>Nesse projeto, desenvolvi uma API Rest para ser o back-end de um futuro front-end. O sistema consiste num 
+gerenciamento de comandas e controle de caixa, feito para se adaptar dentro de um restaurante ou uma lanchonete.  
+O sistema é direcionado para os garçons e atendentes de caixa do estabelecimento. É possível realizar cadastro dos 
+usuários, das mesas, dos itens do cardápio, e principalmente, do pedido feito em uma mesa do local. Na entidade pedido, 
+é possível visualizar todos os itens solicitados com seus respectivos acréscimos e preço, a hora que tal item foi 
 anotado e quem anotou esse pedido. O sistema está em fases iniciais e terá funcionalidades futuras.</b>
 </p>
 

@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TableEntity {
-
     @Id
     private Integer tableNumber;
-
 }

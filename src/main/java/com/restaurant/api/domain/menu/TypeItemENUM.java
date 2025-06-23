@@ -1,17 +1,16 @@
 package com.restaurant.api.domain.menu;
 
-public enum TypeItemENUM {
-    BURGUER("burguer"),
-    DRINK("drink"),
-    PORTION("portion");
+import lombok.Getter;
 
-    private String typeItem;
+@Getter
+public enum TypeItemENUM {
+    BURGER("burger"),
+    DRINK("drink"),
+    APPETIZER("appetizer");
+
+    private final String typeItem;
 
     TypeItemENUM(String typeItem){
         this.typeItem = typeItem;
-    }
-
-    public String getTypeItem(){
-        return typeItem;
     }
 }

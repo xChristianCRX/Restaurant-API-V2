@@ -26,7 +26,7 @@ public class TokenService {
                     .withIssuer("Restaurant API")
                     .withSubject(person.getUsername())
                     .withClaim("id", person.getId().toString())
-                    .withClaim("id", person.getRole().toString())
+                    .withClaim("role", person.getRole().toString())
                     .withExpiresAt(expiresDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception){

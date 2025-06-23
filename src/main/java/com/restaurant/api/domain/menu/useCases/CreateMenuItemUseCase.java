@@ -9,16 +9,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CreateMenuItemUseCase {
+    private final MenuItemRepository repository;
 
-    @Autowired
-    private MenuItemRepository menuItemRepository;
+    public CreateMenuItemUseCase(MenuItemRepository repository) {
+        this.repository = repository;
+    }
 
     public MenuItemEntity execute(CreateMenuItemDTO data){
-        this.menuItemRepository.findByName(data.name())
+        repository.findByName(data.name())
                 .ifPresent(menuItem -> {
-                    throw new AlreadyExistException("This item name already exists!");
+                    throw new AlreadyExistException("This product already exists!");
                 });
 
-        return new MenuItemEntity(data);
+        return repository.save(new MenuItemEntity(data));
     }
 }

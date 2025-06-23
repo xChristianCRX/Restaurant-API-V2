@@ -13,4 +13,11 @@ import lombok.NoArgsConstructor;
 public class TableEntity {
     @Id
     private Integer tableNumber;
+    @Enumerated(EnumType.STRING)
+    private TableStatusENUM status;
+
+    public TableEntity(Integer number) {
+        this.tableNumber = number;
+        this.status = TableStatusENUM.AVAILABLE;
+    }
 }

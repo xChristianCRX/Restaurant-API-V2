@@ -1,17 +1,16 @@
 package com.restaurant.api.domain.person;
 
+import lombok.Getter;
+
+@Getter
 public enum PersonRoleENUM {
     ADMIN("admin"),
     CASHIER("cashier"),
     WAITER("waiter");
 
-    private String role;
+    private final String role;
 
     PersonRoleENUM(String role){
         this.role = role;
-    }
-
-    public String getRole(){
-        return role;
     }
 }

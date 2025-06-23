@@ -5,40 +5,39 @@ import com.restaurant.api.domain.menu.MenuItemRepository;
 import com.restaurant.api.domain.menu.dto.CreateMenuItemDTO;
 import com.restaurant.api.domain.menu.useCases.CreateMenuItemUseCase;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/menu")
 public class MenuController {
+    private final MenuItemRepository repository;
+    private final CreateMenuItemUseCase createMenuItemUseCase;
 
-    @Autowired
-    private MenuItemRepository repository;
-
-    @Autowired
-    private CreateMenuItemUseCase createMenuItemUseCase;
+    public MenuController(MenuItemRepository repository, CreateMenuItemUseCase createMenuItemUseCase) {
+        this.repository = repository;
+        this.createMenuItemUseCase = createMenuItemUseCase;
+    }
 
     @PostMapping
-    public ResponseEntity createItem(@Valid @RequestBody CreateMenuItemDTO data, UriComponentsBuilder uriComponent){
+    public ResponseEntity<MenuItemEntity> createItem(@Valid @RequestBody CreateMenuItemDTO data, UriComponentsBuilder uriComponent){
         var item = createMenuItemUseCase.execute(data);
-        repository.save(item);
-
         var uri = uriComponent.path("/menu/{id}").buildAndExpand(item.getId()).toUri();
         return ResponseEntity.created(uri).body(item);
     }
 
     @GetMapping
-    public ResponseEntity listAll(){
+    public ResponseEntity<List<MenuItemEntity>> listAll(){
         var result = repository.findAll();
         return ResponseEntity.ok().body(result);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable UUID id){
+    public ResponseEntity<MenuItemEntity> delete(@PathVariable UUID id){
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

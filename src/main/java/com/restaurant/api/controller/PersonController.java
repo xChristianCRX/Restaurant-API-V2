@@ -52,10 +52,4 @@ public class PersonController {
         }
         return ResponseEntity.ok().body(new PersonDetailsDTO(result));
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable UUID id){
-        repository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
 }

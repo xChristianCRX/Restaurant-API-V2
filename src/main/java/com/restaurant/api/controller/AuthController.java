@@ -2,6 +2,7 @@ package com.restaurant.api.controller;
 
 import com.restaurant.api.domain.person.PersonEntity;
 import com.restaurant.api.domain.person.dto.AuthRequestDTO;
+import com.restaurant.api.domain.user.AuthUserDetails;
 import com.restaurant.api.infra.security.TokenDTO;
 import com.restaurant.api.infra.security.TokenService;
 import jakarta.validation.Valid;
@@ -24,12 +25,14 @@ public class AuthController {
         this.tokenService = tokenService;
     }
 
-    @PostMapping
-    @RequestMapping("/login")
-    public ResponseEntity<TokenDTO> login(@RequestBody @Valid AuthRequestDTO data){
+    @PostMapping("/login")
+    public ResponseEntity<TokenDTO> login(@RequestBody @Valid AuthRequestDTO data) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(data.username(), data.password());
         var authentication = manager.authenticate(authenticationToken);
-        var tokenJWT = tokenService.generateToken((PersonEntity) authentication.getPrincipal());
+
+        var userDetails = (AuthUserDetails) authentication.getPrincipal();
+        var person = userDetails.getPerson();
+        var tokenJWT = tokenService.generateToken(person);
 
         return ResponseEntity.ok(new TokenDTO(tokenJWT));
     }

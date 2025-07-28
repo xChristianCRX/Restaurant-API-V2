@@ -13,7 +13,7 @@ public record TableOrderDetailsDTO(UUID id, MenuItemDetailsDTO item, List<Additi
     public TableOrderDetailsDTO(TableOrderEntity tableOrder){
         this(
                 tableOrder.getId(),
-                new MenuItemDetailsDTO(tableOrder.getItem().getName(),tableOrder.getItem().getPrice()),
+                new MenuItemDetailsDTO(tableOrder.getItem().getId(), tableOrder.getItem().getName(), tableOrder.getItem().getDescription(), tableOrder.getItem().getPrice(), tableOrder.getItem().getType()),
                 tableOrder.getAdditions(),
                 new WaiterDetailsDTO(tableOrder.getWaiter().getName()),
                 tableOrder.getObservations()

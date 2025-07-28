@@ -6,6 +6,7 @@ import com.restaurant.api.domain.table.TableRepository;
 import com.restaurant.api.domain.table.dto.CreateTableDTO;
 import com.restaurant.api.domain.table.useCases.CreateTableUseCase;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -32,7 +33,7 @@ public class TableController {
 
     @GetMapping
     public ResponseEntity<List<TableEntity>> listAll(){
-        var result = repository.findAll();
+        var result = repository.findAll(Sort.by(Sort.Direction.ASC, "tableNumber"));
         return ResponseEntity.ok().body(result);
     }
 }

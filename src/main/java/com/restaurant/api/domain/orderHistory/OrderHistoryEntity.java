@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,11 +34,14 @@ public class OrderHistoryEntity {
     )
     private List<TableOrderEntity> tableOrders;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
     private Boolean active;
 
     public OrderHistoryEntity(TableEntity tableEntity, List<TableOrderEntity> tableOrders, Boolean active){
         this.table = tableEntity;
         this.tableOrders = tableOrders;
         this.active = active;
+        this.createdAt = LocalDateTime.now();
     }
 }

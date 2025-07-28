@@ -1,6 +1,10 @@
 package com.restaurant.api.domain.menu.dto;
 
-public record MenuItemDetailsDTO(String name, Double price) {
+import com.restaurant.api.domain.menu.TypeItemENUM;
+
+import java.util.UUID;
+
+public record MenuItemDetailsDTO(UUID id, String name, String description, Double price, TypeItemENUM type) {
 
 
 }

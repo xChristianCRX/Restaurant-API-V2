@@ -28,6 +28,10 @@ public class CreateOrderHistoryUseCase {
         var table = tableRepository.findById(data.tableNumber().getTableNumber())
                 .orElseThrow(() -> new EntityNotFoundException("Table number not found!"));
 
+        // Atualiza status da mesa para OCCUPIED
+        table.setStatus(com.restaurant.api.domain.table.TableStatusENUM.OCCUPIED);
+        tableRepository.save(table);
+
         var tableOrders = data.tableOrders().stream()
                 .map(orderData -> createTableOrderUseCase.execute(new CreateTableOrderDTO(
                         orderData.getItem(),

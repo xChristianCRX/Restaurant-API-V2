@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +27,7 @@ public class TableOrderEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private MenuItemEntity item;
 
     @ManyToMany
@@ -40,9 +42,6 @@ public class TableOrderEntity {
     private PersonEntity waiter;
 
     private String observations;
-
-    @CreationTimestamp
-    private LocalDateTime createdAt;
 
     public TableOrderEntity(CreateTableOrderDTO data){
         this.item = data.item();

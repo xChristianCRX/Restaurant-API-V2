@@ -15,18 +15,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CreateTableOrderUseCase {
+    private final TableOrderRepository tableOrderRepository;
+    private final PersonRepository personRepository;
+    private final MenuItemRepository menuItemRepository;
+    private final AdditionRepository additionRepository;
 
-    @Autowired
-    private TableOrderRepository tableOrderRepository;
-
-    @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private MenuItemRepository menuItemRepository;
-
-    @Autowired
-    private AdditionRepository additionRepository;
+    public CreateTableOrderUseCase(TableOrderRepository tableOrderRepository, PersonRepository personRepository,
+                                   MenuItemRepository menuItemRepository, AdditionRepository additionRepository) {
+        this.tableOrderRepository = tableOrderRepository;
+        this.personRepository = personRepository;
+        this.menuItemRepository = menuItemRepository;
+        this.additionRepository = additionRepository;
+    }
 
     public TableOrderEntity execute(CreateTableOrderDTO data){
         var waiter = personRepository.findById(data.waiter().getId())

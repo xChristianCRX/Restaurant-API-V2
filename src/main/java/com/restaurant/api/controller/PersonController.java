@@ -4,6 +4,9 @@ import com.restaurant.api.domain.person.PersonRepository;
 import com.restaurant.api.domain.person.dto.CreatePersonDTO;
 import com.restaurant.api.domain.person.dto.PersonDetailsDTO;
 import com.restaurant.api.domain.person.useCases.CreatePersonUseCase;
+import com.restaurant.api.domain.person.useCases.UpdatePersonUseCase;
+import com.restaurant.api.domain.person.useCases.DeletePersonUseCase;
+import com.restaurant.api.domain.person.dto.UpdatePersonDTO;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +26,14 @@ import java.util.stream.Stream;
 public class PersonController {
     private final PersonRepository repository;
     private final CreatePersonUseCase createPersonUseCase;
+    private final UpdatePersonUseCase updatePersonUseCase;
+    private final DeletePersonUseCase deletePersonUseCase;
 
-    public PersonController(PersonRepository repository, CreatePersonUseCase createPersonUseCase) {
+    public PersonController(PersonRepository repository, CreatePersonUseCase createPersonUseCase, UpdatePersonUseCase updatePersonUseCase, DeletePersonUseCase deletePersonUseCase) {
         this.repository = repository;
         this.createPersonUseCase = createPersonUseCase;
+        this.updatePersonUseCase = updatePersonUseCase;
+        this.deletePersonUseCase = deletePersonUseCase;
     }
 
     @PostMapping
@@ -51,5 +58,19 @@ public class PersonController {
             throw new EntityNotFoundException();
         }
         return ResponseEntity.ok().body(new PersonDetailsDTO(result));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<PersonDetailsDTO> update(@Valid @RequestBody UpdatePersonDTO data) {
+        var person = updatePersonUseCase.execute(data);
+        return ResponseEntity.ok().body(new PersonDetailsDTO(person));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        deletePersonUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -5,7 +5,6 @@ import com.restaurant.api.domain.person.PersonRepository;
 import com.restaurant.api.domain.person.PersonRoleENUM;
 import com.restaurant.api.domain.person.dto.CreatePersonDTO;
 import com.restaurant.api.infra.exceptions.AlreadyExistException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

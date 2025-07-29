@@ -1,6 +1,5 @@
 package com.restaurant.api.controller;
 
-import com.restaurant.api.domain.person.dto.PersonDetailsDTO;
 import com.restaurant.api.domain.table.TableEntity;
 import com.restaurant.api.domain.table.TableRepository;
 import com.restaurant.api.domain.table.dto.CreateTableDTO;

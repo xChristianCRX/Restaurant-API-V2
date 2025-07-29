@@ -2,7 +2,6 @@ package com.restaurant.api.domain.person.useCases;
 
 import com.restaurant.api.domain.person.PersonEntity;
 import com.restaurant.api.domain.person.PersonRepository;
-import com.restaurant.api.domain.person.PersonRoleENUM;
 import com.restaurant.api.domain.person.dto.UpdatePersonDTO;
 import com.restaurant.api.infra.exceptions.AlreadyExistException;
 import jakarta.persistence.EntityNotFoundException;

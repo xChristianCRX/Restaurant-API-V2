@@ -4,7 +4,6 @@ import com.restaurant.api.domain.menu.MenuItemEntity;
 import com.restaurant.api.domain.menu.MenuItemRepository;
 import com.restaurant.api.domain.menu.dto.CreateMenuItemDTO;
 import com.restaurant.api.infra.exceptions.AlreadyExistException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

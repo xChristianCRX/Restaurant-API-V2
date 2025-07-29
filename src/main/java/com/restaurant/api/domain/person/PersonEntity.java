@@ -1,6 +1,5 @@
 package com.restaurant.api.domain.person;
 
-import com.restaurant.api.domain.person.dto.CreatePersonDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

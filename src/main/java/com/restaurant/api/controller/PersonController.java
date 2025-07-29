@@ -18,7 +18,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 @RequestMapping("/person")
 @Validated

@@ -1,6 +1,5 @@
 package com.restaurant.api.controller;
 
-import com.restaurant.api.domain.person.PersonEntity;
 import com.restaurant.api.domain.person.dto.AuthRequestDTO;
 import com.restaurant.api.domain.user.AuthUserDetails;
 import com.restaurant.api.infra.security.TokenDTO;

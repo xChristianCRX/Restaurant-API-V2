@@ -7,7 +7,6 @@ import com.restaurant.api.domain.orderHistory.OrderHistoryEntity;
 import com.restaurant.api.domain.orderHistory.OrderHistoryRepository;
 import com.restaurant.api.domain.table.TableRepository;
 import com.restaurant.api.domain.table.TableStatusENUM;
-import com.restaurant.api.domain.orderHistory.OrderHistoryEntity;
 import com.restaurant.api.domain.orderHistory.dto.UpdateOrderHistoryDTO;
 import com.restaurant.api.domain.orderHistory.useCases.UpdateOrderHistoryUseCase;
 import com.restaurant.api.domain.orderHistory.useCases.DeleteOrderHistoryUseCase;

@@ -1,14 +1,14 @@
 package com.restaurant.api.domain.person.dto;
 
-import com.restaurant.api.domain.person.PersonEntity;
-import com.restaurant.api.domain.person.PersonRoleENUM;
+import com.restaurant.api.domain.person.UserEntity;
+import com.restaurant.api.domain.person.UserRoleENUM;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public record PersonDetailsDTO(UUID id, String name, PersonRoleENUM role, String username, String email) {
+public record PersonDetailsDTO(UUID id, String name, UserRoleENUM role, String username, String email) {
 
-    public PersonDetailsDTO(PersonEntity person){
+    public PersonDetailsDTO(UserEntity person){
         this(
                 person.getId(),
                 person.getName(),
@@ -18,7 +18,7 @@ public record PersonDetailsDTO(UUID id, String name, PersonRoleENUM role, String
         );
     }
 
-    public PersonDetailsDTO(Optional<PersonEntity> person){
+    public PersonDetailsDTO(Optional<UserEntity> person){
         this(
                 person.get().getId(),
                 person.get().getName(),

@@ -2,7 +2,7 @@ package com.restaurant.api.domain.tableOrder;
 
 import com.restaurant.api.domain.addition.AdditionEntity;
 import com.restaurant.api.domain.menu.MenuItemEntity;
-import com.restaurant.api.domain.person.PersonEntity;
+import com.restaurant.api.domain.person.UserEntity;
 import com.restaurant.api.domain.tableOrder.dto.CreateTableOrderDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,7 +35,7 @@ public class TableOrderEntity {
     private List<AdditionEntity> additions;
 
     @ManyToOne
-    private PersonEntity waiter;
+    private UserEntity waiter;
 
     private String observations;
 
@@ -46,7 +46,7 @@ public class TableOrderEntity {
         this.observations = data.observations();
     }
 
-    public TableOrderEntity(MenuItemEntity item, PersonEntity waiter, List<AdditionEntity> additions, String observations){
+    public TableOrderEntity(MenuItemEntity item, UserEntity waiter, List<AdditionEntity> additions, String observations){
         this.item = item;
         this.waiter = waiter;
         this.additions = additions;

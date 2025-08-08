@@ -1,6 +1,6 @@
 package com.restaurant.api.controller;
 
-import com.restaurant.api.domain.person.PersonRepository;
+import com.restaurant.api.domain.person.UserRepository;
 import com.restaurant.api.domain.person.dto.CreatePersonDTO;
 import com.restaurant.api.domain.person.dto.PersonDetailsDTO;
 import com.restaurant.api.domain.person.useCases.CreatePersonUseCase;
@@ -23,12 +23,12 @@ import java.util.UUID;
 @Validated
 @RestController
 public class PersonController {
-    private final PersonRepository repository;
+    private final UserRepository repository;
     private final CreatePersonUseCase createPersonUseCase;
     private final UpdatePersonUseCase updatePersonUseCase;
     private final DeletePersonUseCase deletePersonUseCase;
 
-    public PersonController(PersonRepository repository, CreatePersonUseCase createPersonUseCase, UpdatePersonUseCase updatePersonUseCase, DeletePersonUseCase deletePersonUseCase) {
+    public PersonController(UserRepository repository, CreatePersonUseCase createPersonUseCase, UpdatePersonUseCase updatePersonUseCase, DeletePersonUseCase deletePersonUseCase) {
         this.repository = repository;
         this.createPersonUseCase = createPersonUseCase;
         this.updatePersonUseCase = updatePersonUseCase;

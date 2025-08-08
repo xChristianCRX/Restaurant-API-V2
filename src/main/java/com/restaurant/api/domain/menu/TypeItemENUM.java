@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum TypeItemENUM {
-    BURGUER("burguer"),
+    BURGER("burger"),
     DRINK("drink"),
     APPETIZER("appetizer");
 

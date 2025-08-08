@@ -1,6 +1,6 @@
 package com.restaurant.api.domain.person.useCases;
 
-import com.restaurant.api.domain.person.PersonRepository;
+import com.restaurant.api.domain.person.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,18 +9,18 @@ import java.util.UUID;
 
 @Service
 public class DeletePersonUseCase {
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
 
-    public DeletePersonUseCase(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public DeletePersonUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Transactional
     public void execute(UUID id) {
-        var person = personRepository.findById(id);
+        var person = userRepository.findById(id);
         if (person.isEmpty()) {
             throw new EntityNotFoundException("Usuário não encontrado");
         }
-        personRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 }

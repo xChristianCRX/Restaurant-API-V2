@@ -1,4 +1,0 @@
-ALTER TABLE tables
-    ADD COLUMN status VARCHAR(20) DEFAULT 'AVAILABLE';
-
-UPDATE tables SET status = 'AVAILABLE';

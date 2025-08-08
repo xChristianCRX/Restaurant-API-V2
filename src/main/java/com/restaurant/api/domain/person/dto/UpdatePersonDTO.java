@@ -1,6 +1,6 @@
 package com.restaurant.api.domain.person.dto;
 
-import com.restaurant.api.domain.person.PersonRoleENUM;
+import com.restaurant.api.domain.person.UserRoleENUM;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,5 +13,5 @@ public record UpdatePersonDTO(
         @NotBlank String username,
         @Email String email,
         @Size(min = 8, max = 100) String password,
-        PersonRoleENUM role
+        UserRoleENUM role
 ) { }

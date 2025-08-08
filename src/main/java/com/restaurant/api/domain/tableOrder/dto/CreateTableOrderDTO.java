@@ -2,7 +2,7 @@ package com.restaurant.api.domain.tableOrder.dto;
 
 import com.restaurant.api.domain.addition.AdditionEntity;
 import com.restaurant.api.domain.menu.MenuItemEntity;
-import com.restaurant.api.domain.person.PersonEntity;
+import com.restaurant.api.domain.person.UserEntity;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public record CreateTableOrderDTO(
         List<AdditionEntity> additions,
 
         @NotNull
-        PersonEntity waiter,
+        UserEntity waiter,
 
         String observations
     ) {

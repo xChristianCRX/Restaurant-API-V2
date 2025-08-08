@@ -15,11 +15,11 @@ public class CreateAdditionUseCase {
     }
 
     public AdditionEntity execute(CreateAdditionDTO data) {
-        this.additionRepository.findByName(data.name())
+        additionRepository.findByName(data.name())
                 .ifPresent(additionEntity -> {
                     throw new AlreadyExistException("This addition already exists!");
                 });
 
-        return new AdditionEntity(data);
+        return additionRepository.save(new AdditionEntity(data));
     }
 }

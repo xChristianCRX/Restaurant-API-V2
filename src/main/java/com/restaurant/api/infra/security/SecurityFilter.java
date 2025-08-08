@@ -1,6 +1,6 @@
 package com.restaurant.api.infra.security;
 
-import com.restaurant.api.domain.person.PersonRepository;
+import com.restaurant.api.domain.person.UserRepository;
 import com.restaurant.api.domain.user.AuthUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -17,11 +17,11 @@ import java.io.IOException;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
-    private final PersonRepository personRepository;
+    private final UserRepository userRepository;
 
-    public SecurityFilter(TokenService tokenService, PersonRepository personRepository) {
+    public SecurityFilter(TokenService tokenService, UserRepository userRepository) {
         this.tokenService = tokenService;
-        this.personRepository = personRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var tokenJWT = tokenRecovery(request);
         if(tokenJWT != null) {
             var subject = tokenService.tokenVerifier(tokenJWT);
-            var person = personRepository.findByUsername(subject)
+            var person = userRepository.findByUsername(subject)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             if (person != null) {
                 var userDetails = new AuthUserDetails(person);

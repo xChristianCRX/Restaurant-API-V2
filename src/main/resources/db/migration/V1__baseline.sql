@@ -11,7 +11,8 @@ CREATE TABLE public.menu (
     name character varying(255),
     price double precision,
     type character varying(255),
-    CONSTRAINT menu_type_check CHECK (((type)::text = ANY ((ARRAY['BURGUER'::character varying, 'DRINK'::character varying, 'PORTION'::character varying])::text[])))
+    description character varying(255)
+    CONSTRAINT menu_type_check CHECK (((type)::text = ANY ((ARRAY['BURGER'::character varying, 'DRINK'::character varying, 'PORTION'::character varying])::text[])))
 );
 
 ALTER TABLE public.menu OWNER TO postgres;
@@ -19,22 +20,23 @@ ALTER TABLE public.menu OWNER TO postgres;
 CREATE TABLE public.order_history (
     id uuid NOT NULL,
     active boolean,
-    table_number integer NOT NULL
+    table_number integer NOT NULL,
+    created_at timestamp(6) without time zone
 );
 
 ALTER TABLE public.order_history OWNER TO postgres;
 
-CREATE TABLE public.people (
+CREATE TABLE public.users (
     id uuid NOT NULL,
     email character varying(255),
     name character varying(255),
     password character varying(255),
     role character varying(255),
     username character varying(255),
-    CONSTRAINT people_role_check CHECK (((role)::text = ANY ((ARRAY['ADMIN'::character varying, 'CASHIER'::character varying, 'WAITER'::character varying])::text[])))
+    CONSTRAINT users_role_check CHECK (((role)::text = ANY ((ARRAY['ADMIN'::character varying, 'CASHIER'::character varying, 'WAITER'::character varying])::text[])))
 );
 
-ALTER TABLE public.people OWNER TO postgres;
+ALTER TABLE public.users OWNER TO postgres;
 
 CREATE TABLE public.rl_item_additions (
     fk_table_order uuid NOT NULL,
@@ -51,14 +53,14 @@ CREATE TABLE public.rl_orderhistory_tableorders (
 ALTER TABLE public.rl_orderhistory_tableorders OWNER TO postgres;
 
 CREATE TABLE public.tables (
-    table_number integer NOT NULL
+    table_number integer NOT NULL,
+    status character varying(20) default 'AVAILABLE'
 );
 
 ALTER TABLE public.tables OWNER TO postgres;
 
 CREATE TABLE public.tables_order (
     id uuid NOT NULL,
-    created_at timestamp(6) without time zone,
     observations character varying(255),
     item_id uuid,
     waiter_id uuid
@@ -75,8 +77,8 @@ ALTER TABLE ONLY public.menu
 ALTER TABLE ONLY public.order_history
     ADD CONSTRAINT order_history_pkey PRIMARY KEY (id);
 
-ALTER TABLE ONLY public.people
-    ADD CONSTRAINT people_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 ALTER TABLE ONLY public.tables_order
     ADD CONSTRAINT tables_order_pkey PRIMARY KEY (id);
@@ -94,7 +96,7 @@ ALTER TABLE ONLY public.tables_order
     ADD CONSTRAINT fk40wn7wh196w7v6454yj0ey4ad FOREIGN KEY (item_id) REFERENCES public.menu(id);
 
 ALTER TABLE ONLY public.tables_order
-    ADD CONSTRAINT fk8na7wky5uv8fvmv61e38mk7ja FOREIGN KEY (waiter_id) REFERENCES public.people(id);
+    ADD CONSTRAINT fk8na7wky5uv8fvmv61e38mk7ja FOREIGN KEY (waiter_id) REFERENCES public.users(id);
 
 ALTER TABLE ONLY public.order_history
     ADD CONSTRAINT fkafqea4sjshlelybwdrjkne54b FOREIGN KEY (table_number) REFERENCES public.tables(table_number);

@@ -1,6 +1,6 @@
 package com.restaurant.api.domain.user;
 
-import com.restaurant.api.domain.person.PersonEntity;
+import com.restaurant.api.domain.person.UserEntity;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,9 +11,9 @@ import java.util.List;
 
 @Getter
 public class AuthUserDetails implements UserDetails {
-    private final PersonEntity person;
+    private final UserEntity person;
 
-    public AuthUserDetails(PersonEntity person) {
+    public AuthUserDetails(UserEntity person) {
         this.person = person;
     }
 
